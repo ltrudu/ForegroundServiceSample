@@ -89,9 +89,9 @@ public class ForegroundService extends Service {
             NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, channelId);
             mNotification = notificationBuilder.setOngoing(true)
                     .setSmallIcon(R.mipmap.ic_launcher)
-                    .setContentTitle(getString(R.string.no_sleep_service_notification_title))
-                    .setContentText(getString(R.string.no_sleep_service_notification_text))
-                    .setTicker(getString(R.string.no_sleep_service_notification_tickle))
+                    .setContentTitle(getString(R.string.foreground_service_notification_title))
+                    .setContentText(getString(R.string.foreground_service_notification_text))
+                    .setTicker(getString(R.string.foreground_service_notification_tickle))
                     .setPriority(PRIORITY_MIN)
                     .setCategory(NotificationCompat.CATEGORY_SERVICE)
                     .setContentIntent(pendingIntent)
@@ -152,12 +152,12 @@ public class ForegroundService extends Service {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private String createNotificationChannel(NotificationManager notificationManager){
-        NotificationChannel channel = new NotificationChannel(getString(R.string.nosleepservice_channel_id), getString(R.string.nosleepservice_channel_name), NotificationManager.IMPORTANCE_HIGH);
+        NotificationChannel channel = new NotificationChannel(getString(R.string.foregroundservice_channel_id), getString(R.string.foregroundservice_channel_name), NotificationManager.IMPORTANCE_HIGH);
         // omitted the LED color
         channel.setImportance(NotificationManager.IMPORTANCE_NONE);
         channel.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
         notificationManager.createNotificationChannel(channel);
-        return getString(R.string.nosleepservice_channel_id);
+        return getString(R.string.foregroundservice_channel_id);
     }
 
     private void logD(String message)
