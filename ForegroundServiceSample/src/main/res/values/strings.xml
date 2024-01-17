@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">ForegroundService</string>
+    <string name="no_sleep_service_notification_title">ForegroundService</string>
+    <string name="no_sleep_service_notification_text">A service that runs in foreground.</string>
+    <string name="no_sleep_service_notification_tickle">ForegroundService</string>
+    <string name="serviceStopped">Service is stopped</string>
+    <string name="serviceStarted">Service is running</string>
+    <string name="startOnBoot">Start on boot</string>
+    <string name="doNothingOnBoot">Do nothing on boot</string>
+    <string name="startOnCharging">Start when charging \nStop when not charging</string>
+    <string name="doNothingOnCharging">Power events not\nmonitored</string>
+    <string name="nosleepservice_channel_name">Foreground Service</string>
+    <string name="nosleepservice_channel_id">Foreground Service channel</string>
+    <string name="appdescription">Foreground Service is a service that runs in foreground.\nService can be started with adb:\nadb shell am broadcast -a com.zebra.foregroundservice.startservice\nService can be stopped with adb:\nadb shell am broadcast -a com.zebra.foregroundservice.stopservice</string>
+    <string name="powereventswatcherservice_channel_name">Foreground Service</string>
+    <string name="powereventswatcherservice_channel_id">Foreground Service channel</string>
+    <string name="powereventswatcherservice_notification_title">ForegroundService Power Events Watcher</string>
+    <string name="powereventswatcherservice_notification_text">A service that watch for power events (docked, charging) to start or stop ForegroundService.</string>
+    <string name="powereventswatcherservice_notification_tickle">ForegroundService Power Events Watcher</string>
+
+</resources>
