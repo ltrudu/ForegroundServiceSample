@@ -111,7 +111,7 @@ public class ForegroundService extends Service {
             // Start foreground service
             startForeground(SERVICE_ID, mNotification);
 
-            // TODO: Add your service code here
+            startServiceCustomCode();
 
             logD("startService:Service started without error.");
         }
@@ -124,13 +124,23 @@ public class ForegroundService extends Service {
 
     }
 
+    private void startServiceCustomCode()
+    {
+        // TODO: Add your service initialization and running code here
+    }
+
+    private void stopServiceCustomCode()
+    {
+        // TODO: Stop your actions and release your stuffs here
+    }
+
     private void stopService()
     {
         try
         {
             logD("stopService.");
 
-            // TODO: Release your stuffs here
+            stopServiceCustomCode();
             if(mNotificationManager != null)
             {
                 mNotificationManager.cancelAll();
