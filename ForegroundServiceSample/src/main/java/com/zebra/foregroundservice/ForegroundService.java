@@ -24,6 +24,8 @@ import static androidx.core.app.NotificationCompat.PRIORITY_MIN;
 public class ForegroundService extends Service {
     private static final int SERVICE_ID = 1;
 
+    private static boolean isRunning = false;
+
     private NotificationManager mNotificationManager;
     private Notification mNotification;
 
@@ -45,6 +47,9 @@ public class ForegroundService extends Service {
         logD("onStartCommand");
         super.onStartCommand(intent, flags, startId);
         startService();
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            isRunning = true;
+        }
         return Service.START_STICKY;
     }
 
@@ -52,6 +57,9 @@ public class ForegroundService extends Service {
     {
         logD("onDestroy");
         stopService();
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            isRunning = false;
+        }
     }
 
     @SuppressLint({"Wakelock"})
@@ -148,7 +156,13 @@ public class ForegroundService extends Service {
             }
 
 
-            stopForeground(true);
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                stopForeground(STOP_FOREGROUND_REMOVE);
+            }
+            else {
+                stopForeground(true);
+            }
+
             logD("stopService:Service stopped without error.");
         }
         catch(Exception e)
@@ -198,10 +212,15 @@ public class ForegroundService extends Service {
     }
 
     public static boolean isRunning(Context context) {
-        ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
-            if (ForegroundService.class.getName().equals(service.service.getClassName())) {
-                return true;
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            return isRunning;
+        }
+        else {
+            ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+            for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+                if (PowerEventsWatcherService.class.getName().equals(service.service.getClassName())) {
+                    return true;
+                }
             }
         }
         return false;
